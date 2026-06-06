@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "6457e61f-f7ff-48dd-afef-1cf57c81440c",
+    "name": "DELETE Method",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55356697"
+  },
+  "item": [
+    {
+      "name": "Successful Delete - (204 No content)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Status code validation ",
+              "pm.test(\"Status code is 204\", function() {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{MockServer_url}}/users/10",
+          "host": [
+            "{{MockServer_url}}"
+          ],
+          "path": [
+            "users",
+            "10"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Successful Delete - (204 No content)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{MockServer_url}}/users/10",
+              "host": [
+                "{{MockServer_url}}"
+              ],
+              "path": [
+                "users",
+                "10"
+              ]
+            }
+          },
+          "status": "No Content",
+          "code": 204,
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "Resource not found - (404)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Status code validation ",
+              "pm.test(\"Status code is 404\", function() {",
+              "    pm.response.to.have.status(404);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{MockServer_url}}/users/9999",
+          "host": [
+            "{{MockServer_url}}"
+          ],
+          "path": [
+            "users",
+            "9999"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Resource not found - (404)",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{MockServer_url}}/users/9999",
+              "host": [
+                "{{MockServer_url}}"
+              ],
+              "path": [
+                "users",
+                "9999"
+              ]
+            }
+          },
+          "status": "Not Found",
+          "code": 404,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "\n{\n  \"message\": \"Endpoint doesn't exist\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Deleting the entire resource path - (405 Method Not Allowed )",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Status code validation ",
+              "pm.test(\"Status code is 405\", function() {",
+              "    pm.response.to.have.status(405);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{MockServer_url}}/users",
+          "host": [
+            "{{MockServer_url}}"
+          ],
+          "path": [
+            "users"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Deleting the entire resource path - (405 Method Not Allowed )",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{MockServer_url}}/users",
+              "host": [
+                "{{MockServer_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json",
+              "description": "",
+              "type": "text"
+            }
+          ],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\n  \"message\": \"Method Not Allowed\"\n}"
+        }
+      ]
+    }
+  ]
+}

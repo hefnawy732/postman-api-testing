@@ -1,0 +1,147 @@
+{
+  "info": {
+    "_postman_id": "8b92239a-8167-4f70-b4e3-d7a5519239dc",
+    "name": "POST Method",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55356697"
+  },
+  "item": [
+    {
+      "name": "Success creation - (201 Created)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();",
+              "",
+              "",
+              "// Response time below 2sec",
+              "pm.test(\"Response time is under 2 seconds\", function () {",
+              "    pm.expect(pm.response.responseTime).to.be.below(2000);",
+              "});",
+              "",
+              "// Response is an object",
+              "pm.test(\"Response is an object\", function () {",
+              "    pm.expect(response).to.be.an(\"object\");",
+              "});",
+              "",
+              "// Making sure ID is generated",
+              "pm.test(\"ID is generated\", function () {",
+              "    pm.expect(response.id).to.exist",
+              "});",
+              "",
+              "// Making sure added fields are returned",
+              "pm.test(\"Has required fields\", function () {",
+              "    pm.expect(response).to.include.keys(\"id\", \"firstName\", \"lastName\");",
+              "});",
+              "",
+              "// Verifying input vs output consistency",
+              "const sentData = JSON.parse(pm.request.body.raw);",
+              "",
+              "pm.test(\"Response contains all the sent data\", function () {",
+              "pm.expect(response.firstName).to.eql(sentData.firstName);",
+              "pm.expect(response.lastName).to.eql(sentData.lastName);",
+              "pm.expect(response.age).to.eql(sentData.age);",
+              "});",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Mahmoud\",\n  \"lastName\": \"Hefnawy\",\n  \"age\": 27\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{DummyJson_url}}/users/add",
+          "host": [
+            "{{DummyJson_url}}"
+          ],
+          "path": [
+            "users",
+            "add"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Missing required fields - (400 Bad request)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Status code validation ",
+              "pm.test(\"Status code is 400 Bad Request\", function() {",
+              "    pm.response.to.have.status(400)",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"\",\n  \"password\": \"\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{DummyJson_url}}/auth/login",
+          "host": [
+            "{{DummyJson_url}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
