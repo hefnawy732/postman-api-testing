@@ -4,6 +4,8 @@
 
 This project demonstrates API testing using Postman across CRUD operations, authentication workflows, response validation, performance checks, and error handling scenarios.
 
+Note: For Project screenshots: https://drive.google.com/drive/folders/14R1YZBxqkU6wP8D51jKXZf96C4TkfQWZ?usp=sharing
+
 ## APIs Used
 
 * DummyJSON
